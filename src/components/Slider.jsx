@@ -1,11 +1,11 @@
 import { ArrowLeftOutlined, ArrowRightOutlined } from "@material-ui/icons";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
+import { sliderItems } from "../data";
 
 const Container = styled.div`
   display: flex;
   height: 100vh;
-  background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
   overflow: hidden;
 `;
 
@@ -25,11 +25,14 @@ const Arrow = styled.div`
   justify-content: center;
   cursor: pointer;
   opacity: 0.5;
+  z-index: 2;
 `;
 
 const Wrapper = styled.div`
   height: 100%;
   display: flex;
+  transition: all 1.5s ease;
+  transform: translateX(${(props) => props.slideIndex * -100}vw);
 `;
 
 const Slide = styled.div`
@@ -37,6 +40,7 @@ const Slide = styled.div`
   height: 100vh;
   display: flex;
   align-items: center;
+  background-color: #${(props) => props.bg};
 `;
 
 const ImgContainer = styled.div`
@@ -72,44 +76,34 @@ const Button = styled.button`
 `;
 
 const Slider = () => {
+  const [slideIndex, setSlideIndex] = useState(0);
+  const handleClick = (direction) => {
+    if (direction === "left") {
+      setSlideIndex(slideIndex > 0 ? slideIndex - 1 : 2);
+    } else {
+      setSlideIndex(slideIndex < 2 ? slideIndex + 1 : 0);
+    }
+  };
   return (
     <Container>
-      <Arrow direction="left">
+      <Arrow direction="left" onClick={() => handleClick("left")}>
         <ArrowLeftOutlined />
       </Arrow>
-      <Wrapper>
-        <Slide>
-          <ImgContainer>
-            <Image src="https://i.ibb.co/DG69bQ4/2.png" alt="jjhj" />
-          </ImgContainer>
-          <InfoContainer>
-            <Title>Hello</Title>
-            <Desc>wolrd</Desc>
-            <Button>SHOW NOW</Button>
-          </InfoContainer>
-        </Slide>
-        <Slide>
-          <ImgContainer>
-            <Image src="https://i.ibb.co/DG69bQ4/2.png" alt="jjhj" />
-          </ImgContainer>
-          <InfoContainer>
-            <Title>Hello</Title>
-            <Desc>wolrd</Desc>
-            <Button>SHOW NOW</Button>
-          </InfoContainer>
-        </Slide>
-        <Slide>
-          <ImgContainer>
-            <Image src="https://i.ibb.co/DG69bQ4/2.png" alt="jjhj" />
-          </ImgContainer>
-          <InfoContainer>
-            <Title>Hello</Title>
-            <Desc>wolrd</Desc>
-            <Button>SHOW NOW</Button>
-          </InfoContainer>
-        </Slide>
+      <Wrapper slideIndex={slideIndex}>
+        {sliderItems.map((item) => (
+          <Slide bg={item.bg} key={item.id}>
+            <ImgContainer>
+              <Image src={item.img} height={item.height} />
+            </ImgContainer>
+            <InfoContainer>
+              <Title>{item.title}</Title>
+              <Desc>{item.desc}</Desc>
+              <Button>SHOW NOW</Button>
+            </InfoContainer>
+          </Slide>
+        ))}
       </Wrapper>
-      <Arrow direction="right">
+      <Arrow direction="right" onClick={() => handleClick("right")}>
         <ArrowRightOutlined />
       </Arrow>
     </Container>
