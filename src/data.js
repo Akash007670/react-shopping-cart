@@ -22,3 +22,30 @@ export const sliderItems = [
     bg: "fbf0f4",
   },
 ];
+
+export const categories = [
+  {
+    id: 1,
+    img: "https://images.pexels.com/photos/11075319/pexels-photo-11075319.jpeg?auto=compress&cs=tinysrgb&w=600",
+    title: "SHIRT STYLE!!",
+    alt: "xysdsz",
+  },
+  {
+    id: 2,
+    img: "https://images.pexels.com/photos/9077989/pexels-photo-9077989.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+    title: "SHIRT STYLE!!",
+    alt: "xyzsdsd",
+  },
+  {
+    id: 3,
+    img: "https://images.pexels.com/photos/5383443/pexels-photo-5383443.jpeg?auto=compress&cs=tinysrgb&w=600&lazy=load",
+    title: "DARK JACKETS",
+    alt: "xysdsdz",
+  },
+  {
+    id: 4,
+    img: "https://images.pexels.com/photos/10129710/pexels-photo-10129710.jpeg?auto=compress&cs=tinysrgb&w=600",
+    title: "SHIRT STYLE!!",
+    alt: "xyzsds",
+  },
+];
